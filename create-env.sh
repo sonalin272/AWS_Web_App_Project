@@ -8,10 +8,9 @@ image_id=$1
 key_name="snimbalk"
 security_grp_id="sg-fd8c4384"
 number_of_instances=3
-client_token="550e8400-e29b-41d4-a716-446655440020"
+client_token="660e8400-e29b-41d4-a716-446655440020"
 availability_zones="us-west-2b"
 load_balancer_name="snimbalk-load-balancer"
-policy_name="my-ProxyProtocol-policy"
 launch_config_name="snimbalk-launch-config"
 autoscaling_grp_name="snimbalk-auto-scaling-group"
 min_size=2
@@ -32,9 +31,6 @@ echo "Instances are running...."
 
 #Create load balancer
 aws elb create-load-balancer --load-balancer-name $load_balancer_name --security-groups $security_grp_id --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" --availability-zones $availability_zones
-
-#Create load balancer policy
-aws elb create-load-balancer-policy --load-balancer-name $load_balancer_name --policy-name $policy_name --policy-type-name ProxyProtocolPolicyType --policy-attributes AttributeName=ProxyProtocol,AttributeValue=true
 
 #Attach instances to load balancer
 ID=`aws ec2 describe-instances --filters "Name=client-token,Values=$client_token" --query 'Reservations[*].Instances[].InstanceId'`
