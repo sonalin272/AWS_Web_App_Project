@@ -15,15 +15,8 @@ echo "Load balancer detached..."
 #Set desired capacity to 0
 aws autoscaling update-auto-scaling-group --auto-scaling-group-name $autoscaling_grp_name --launch-configuration-name $launch_config_name --min-size 0 --desired-capacity 0
 
-#Detach instances from load balancer
-ID=`aws elb describe-load-balancers --query 'LoadBalancerDescriptions[*].Instances[].InstanceId'`
-aws elb deregister-instances-from-load-balancer --load-balancer-name $load_balancer_name --instances $ID
-echo "Instances are detached from load balancer..."
-
-#Terminate instances
+#Wait to terminate instances
 all_instances=`aws ec2 describe-instances --query 'Reservations[*].Instances[].InstanceId'`
-aws ec2 terminate-instances --instance-ids $all_instances
-
 aws ec2 wait instance-terminated --instance-ids $all_instances
 echo "All instances are terminated..."
 

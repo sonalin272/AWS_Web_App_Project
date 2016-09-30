@@ -8,7 +8,7 @@ image_id=$1
 key_name="snimbalk"
 security_grp_id="sg-fd8c4384"
 number_of_instances=3
-client_token="660e8400-e29b-41d4-a716-446655440020"
+client_token="670e8400-e29b-41d4-a716-446655440020"
 availability_zones="us-west-2b"
 load_balancer_name="snimbalk-load-balancer"
 launch_config_name="snimbalk-launch-config"
@@ -40,7 +40,11 @@ aws elb register-instances-with-load-balancer --load-balancer-name $load_balance
 aws autoscaling create-launch-configuration --launch-configuration-name $launch_config_name --image-id $image_id --key-name $key_name --security-groups $security_grp_id --instance-type t2.micro --user-data file://installapp.sh
 
 #Create autoscaling group
-aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoscaling_grp_name --launch-configuration-name $launch_config_name --load-balancer-names $load_balancer_name --availability-zones $availability_zones --min-size $min_size --max-size $max_size --desired-capacity $desired_size	
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoscaling_grp_name --launch-configuration-name $launch_config_name --load-balancer-names $load_balancer_name --availability-zones $availability_zones --min-size 0 --max-size $max_size --desired-capacity 0
+
+aws autoscaling attach-instances --instance-ids $ID --auto-scaling-group-name $autoscaling_grp_name
+
+aws autoscaling update-auto-scaling-group --auto-scaling-group-name $autoscaling_grp_name --launch-configuration-name $launch_config_name --min-size $min_size --desired-capacity $desired_size	
 
 echo "Process completed...."
 
