@@ -1,26 +1,27 @@
 #!/bin/bash
 #Execution of shell script
-#sh create-env.sh ami-06b94666 
-#*********************************************************************************************
+#sh create-env.sh ami-06b94666 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group
+#*****************************************************************************************************************************
 
 #Variable declaration
 image_id=$1
-key_name="snimbalk"
-security_grp_id="sg-fd8c4384"
-number_of_instances=3
-client_token="670e8400-e29b-41d4-a716-446655440020"
+key_name=$2
+security_grp_id=$3
+number_of_instances=$4
+client_token="firsttoken"
 availability_zones="us-west-2b"
-load_balancer_name="snimbalk-load-balancer"
-launch_config_name="snimbalk-launch-config"
-autoscaling_grp_name="snimbalk-auto-scaling-group"
+load_balancer_name=$5
+launch_config_name=$6
+autoscaling_grp_name=$7
 min_size=2
 max_size=5
 desired_size=4
 
-if [ $# -ne 1 ] ; then
-echo -e  " Please provide correct number of arguments"
+if [ $# -ne 7 ] ; then
+echo  " Please provide correct number of arguments..Expected argument count is 7."
+echo "e.g : sh create-env.sh ami-06b94666 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group"
 else
-echo " $1 "
+echo " $@ "
 
 #Create instances
 aws ec2 run-instances --image-id $image_id --key-name $key_name  --security-group-ids $security_grp_id --instance-type t2.micro --count $number_of_instances --placement AvailabilityZone=$availability_zones --client-token $client_token --user-data file://installapp.sh
@@ -31,6 +32,7 @@ echo "Instances are running...."
 
 #Create load balancer
 aws elb create-load-balancer --load-balancer-name $load_balancer_name --security-groups $security_grp_id --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" --availability-zones $availability_zones
+echo "Load balancer $5 is created..."
 
 #Attach instances to load balancer
 ID=`aws ec2 describe-instances --filters "Name=client-token,Values=$client_token" --query 'Reservations[*].Instances[].InstanceId'`
@@ -41,6 +43,7 @@ aws autoscaling create-launch-configuration --launch-configuration-name $launch_
 
 #Create autoscaling group
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoscaling_grp_name --launch-configuration-name $launch_config_name --load-balancer-names $load_balancer_name --availability-zones $availability_zones --min-size 0 --max-size $max_size --desired-capacity 0
+echo "Autoscaling group $7 is created.."
 
 aws autoscaling attach-instances --instance-ids $ID --auto-scaling-group-name $autoscaling_grp_name
 
