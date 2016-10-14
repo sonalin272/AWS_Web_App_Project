@@ -1,6 +1,6 @@
 #!/bin/bash
 #Execution of shell script
-#sh create-env.sh ami-06b94666 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group
+#sh create-env.sh ami-06b94666 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group firsttoken
 #*****************************************************************************************************************************
 
 #Variable declaration
@@ -8,7 +8,7 @@ image_id=$1
 key_name=$2
 security_grp_id=$3
 number_of_instances=$4
-client_token="firsttoken"
+client_token=$8
 availability_zones="us-west-2b"
 load_balancer_name=$5
 launch_config_name=$6
@@ -17,7 +17,7 @@ min_size=2
 max_size=5
 desired_size=4
 
-if [ $# -ne 7 ] ; then
+if [ $# -ne 8 ] ; then
 echo  " Please provide correct number of arguments..Expected argument count is 7."
 echo "e.g : sh create-env.sh ami-06b94666 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group"
 else
