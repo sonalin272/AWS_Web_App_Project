@@ -18,7 +18,7 @@ max_size=5
 desired_size=4
 
 if [ $# -ne 8 ] ; then
-echo  " Please provide correct number of arguments..Expected argument count is 7."
+echo  " Please provide correct number of arguments..Expected argument count is 8."
 echo "e.g : sh create-env.sh ami-06b94666 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group xxx"
 else
 echo " $@ "
