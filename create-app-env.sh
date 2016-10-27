@@ -7,6 +7,6 @@ aws rds create-db-instance --db-name dev --db-instance-identifier snimbalk-db --
 
 aws rds wait db-instance-available --db-instance-identifier snimbalk-db 
 
-aws rds delete-db-instance --db-instance-identifier snimbalk-db --skip-final-snapshot
+#aws rds delete-db-instance --db-instance-identifier snimbalk-db --skip-final-snapshot
 
 
