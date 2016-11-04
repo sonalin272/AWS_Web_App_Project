@@ -1,6 +1,6 @@
 #!/bin/bash
 #Execution of shell script
-#sh create-env.sh ami-06b94666 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group firsttoken
+#sh create-env.sh ami-438b2a23 snimbalk sg-fd8c4384 3 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group firsttoken
 #*****************************************************************************************************************************
 
 #Variable declaration
@@ -24,7 +24,7 @@ else
 echo " $@ "
 
 #Create instances
-aws ec2 run-instances --image-id $image_id --key-name $key_name  --security-group-ids $security_grp_id --instance-type t2.micro --count $number_of_instances --placement AvailabilityZone=$availability_zones --client-token $client_token --user-data file://installapp.sh
+aws ec2 run-instances --image-id $image_id --key-name $key_name  --security-group-ids $security_grp_id --instance-type t2.micro --count $number_of_instances --placement AvailabilityZone=$availability_zones --client-token $client_token --user-data file://installapp.sh --iam-instance-profile Name=developer
 
 #Wait till instances start running
 aws ec2 wait instance-running --filters "Name=client-token,Values=$client_token"
@@ -39,7 +39,7 @@ ID=`aws ec2 describe-instances --filters "Name=client-token,Values=$client_token
 aws elb register-instances-with-load-balancer --load-balancer-name $load_balancer_name --instances $ID
 
 #Launch configuration for autoscaling
-aws autoscaling create-launch-configuration --launch-configuration-name $launch_config_name --image-id $image_id --key-name $key_name --security-groups $security_grp_id --instance-type t2.micro --user-data file://installapp.sh
+aws autoscaling create-launch-configuration --launch-configuration-name $launch_config_name --image-id $image_id --key-name $key_name --security-groups $security_grp_id --instance-type t2.micro --user-data file://installapp.sh --iam-instance-profile Name=developer
 
 #Create autoscaling group
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoscaling_grp_name --launch-configuration-name $launch_config_name --load-balancer-names $load_balancer_name --availability-zones $availability_zones --min-size 0 --max-size $max_size --desired-capacity 0
