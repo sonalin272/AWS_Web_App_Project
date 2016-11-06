@@ -39,7 +39,7 @@ ID=`aws ec2 describe-instances --filters "Name=client-token,Values=$client_token
 aws elb register-instances-with-load-balancer --load-balancer-name $load_balancer_name --instances $ID
 
 #Launch configuration for autoscaling
-aws autoscaling create-launch-configuration --launch-configuration-name $launch_config_name --image-id $image_id --key-name $key_name --security-groups $security_grp_id --instance-type t2.micro --user-data file://installapp.sh --iam-instance-profile Name=developer
+aws autoscaling create-launch-configuration --launch-configuration-name $launch_config_name --image-id $image_id --key-name $key_name --security-groups $security_grp_id --instance-type t2.micro --user-data file://installapp.sh --iam-instance-profile developer
 
 #Create autoscaling group
 aws autoscaling create-auto-scaling-group --auto-scaling-group-name $autoscaling_grp_name --launch-configuration-name $launch_config_name --load-balancer-names $load_balancer_name --availability-zones $availability_zones --min-size 0 --max-size $max_size --desired-capacity 0
