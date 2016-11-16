@@ -27,8 +27,17 @@
     <body style="background-color:powderblue;">
         <h2 style="color:black;font-size:100%;font-family:verdana;text-align:left;">STUDENT INFORMATION</h2>
             <?php
-            /*Connect to database*/
-            $link = mysqli_connect('snimbalk-db.c6ulbi9cmpdg.us-west-2.rds.amazonaws.com:3306', 'root', 'Goodluck16'
+require 'vendor/autoload.php'; 
+//Create client to connect to RDS
+    $rds_client = new Aws\Rds\RdsClient([
+	'version' => 'latest',
+	'region'  => 'us-west-2']);
+    $endpoint = "";
+    $rds_result = $rds_client->describeDBInstances( array('DBInstanceIdentifier' => 'snimbalk-db',));
+    $endpoint=$rds_result['DBInstances'][0]['Endpoint']['Address'];            
+//echo $endpoint;
+/*Connect to database*/
+            $link = mysqli_connect($endpoint, 'root', 'Goodluck16'
 ,'school');
             if (!$link) {
                     die('Could not connect: ' . mysql_error());
