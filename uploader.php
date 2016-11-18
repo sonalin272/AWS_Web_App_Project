@@ -1,11 +1,10 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
-if (isset($_FILES['file'])and isset($_POST['buttonFile']))
+if (1==1 or isset($_FILES['file'])and isset($_POST['buttonFile']))
 {
     $filename = $_FILES['file'];
-    $user = $_SESSION['username'];
-   // move_uploaded_file($_FILES['file']['tmp_name'], $_FILES['file']['name']);
+    $user = 'snimbalk';//$_SESSION['username'];
     
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir . basename($_FILES['file']['name']);
@@ -31,7 +30,7 @@ if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile))
     'Key' => basename($uploadfile),
     'SourceFile' => $uploadfile]);
     $url = $s_result['ObjectURL'];
-     echo $url; 
+  //   echo $url; 
    //Create client to connect to RDS
     $rds_client = new Aws\Rds\RdsClient([
 	'version' => 'latest',
@@ -46,12 +45,51 @@ if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile))
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit();
 	}
+// Prepared statement
+if (!($stmt = $link->prepare("INSERT INTO records (ID,email,phone,s3_raw_url,s3_finished_url,status,receipt) VALUES (NULL,?,?,?,?,?,?)"))) {
+    echo "Prepare failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+$email=$user;
+$phone='1234567';
+$rawurl=$url;
+$finishedurl=' ';
+$status=0;
+$receipt=md5($url);
+// prepared statements will not accept literals (pass by reference) in bind_params, you need to declare variables
+$stmt->bind_param("ssssis",$email,$phone,$rawurl,$finishedurl,$status,$receipt);
+
+if (!$stmt->execute()) {
+    echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+else
+{
+printf("%d Row inserted.\n", $stmt->affected_rows);
+#Get q url n attributes
+$sqs_client = new Aws\Sqs\SqsClient([
+    'version' => 'latest',
+    'region'  => 'us-west-2'
+]);
+$q_url = $sqs_client->getQueueUrl([
+    'QueueName' => 'snimbalk_queue', // REQUIRED
+]);
+echo "url:" . $q_url['QueueUrl'];
+$q_result = $sqs_client->sendMessage([
+    'DelaySeconds' => 1,
+    'MessageBody' => $receipt, // REQUIRED
+    'QueueUrl' => $q_url['QueueUrl'], // REQUIRED
+]);
+echo $q_result;
+}
+
+/* explicit close recommended */
+$stmt->close();
+
 	//Select result
 	$s_query = "SELECT id,email,phone,s3_raw_url FROM records where email='$user'";
 	if ($result = mysqli_query($link, $s_query)) 
 	{
 		$row = mysqli_fetch_row($result);
-	        //printf ("%s %s %s \n", $row[1], $row[2], $row[3]);		
+	   //     printf ("%s %s %s \n", $row[1], $row[2], $row[3]);		
 		//Close statement
 		mysqli_free_result($result);
 	}
@@ -65,11 +103,19 @@ if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile))
 <body>
 <?php
 //print_r($filename);
-echo "filename: " . $filename['name'];
-echo "username: " . $row[1];
-echo "phone:" . $row[2];
-echo "Link to uploaded image:" . $row[3];
+printf ("filename: %s", $filename['name'], "\n");
+printf ("username: %s" , $row[1],"\n");
+printf ("phone: %s", $row[2], "\n");
+printf ("Link to uploaded image: %s" , $row[3], "\n");
 ?>
+<div style="min-height:300px;padding-left:20%;padding-right:20%;padding-top:5%">
+   <form enctype="multipart/form-data" id="uploader" action="upload.php" method="POST">
+      <!-- MAX_FILE_SIZE must precede the file input field -->
+      <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+      <!-- Name of input element determines name in $_FILES array -->
+      <input type="submit" id="uploadFile" name="uploadFile" value="BaCK"/>
+   </form>
+</div>
 </body>
 </html>
 
