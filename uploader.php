@@ -1,10 +1,10 @@
 <?php
 session_start();
 require 'vendor/autoload.php';
-if (1==1 or isset($_FILES['file'])and isset($_POST['buttonFile']))
+if (isset($_FILES['file'])and isset($_POST['buttonFile']))
 {
     $filename = $_FILES['file'];
-    $user = 'snimbalk';//$_SESSION['username'];
+    $user = $_SESSION['username'];
     
 $uploaddir = '/tmp/';
 $uploadfile = $uploaddir . basename($_FILES['file']['name']);
