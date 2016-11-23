@@ -43,4 +43,48 @@ aws ec2 terminate-instances --instance-ids $all_instances
 aws ec2 wait instance-terminated --instance-ids $all_instances
 echo -e "\n All instances are terminated... \n"
 
+#Delete database
+db_ids=`aws rds describe-db-instances --query 'DBInstances[*].DBInstanceIdentifier'`
+echo -e "\n List of db identifiers: \n $db_ids \n"
+for i in $db_ids
+do
+        aws rds delete-db-instance --db-instance-identifier $i --skip-final-snapshot
+        echo "DB $i is deleted..."
+        sleep 1
+done
+
+#Delete SQS
+q_name=`aws sqs list-queues --query 'QueueUrls'`
+echo -e "\n List of Queues: \n $q_name \n"
+for i in $q_name
+do
+        aws sqs delete-queue --queue-url $i
+        echo "Queue $i is deleted..."
+        sleep 1
+done
+
+#Delete SNS topic and unsubscribe to the topic
+sub_arn=`aws sns list-subscriptions --query 'Subscriptions[*].SubscriptionArn'`
+echo -e "\n List of subscriptions: \n $sub_arn \n"
+for i in $sub_arn
+do
+        aws sns unsubscribe --subscription-arn $i
+        echo "$i is unsubscribed..."
+        sleep 1
+done
+topic_arn=`aws sns list-topics --query 'Topics[*].TopicArn'`
+echo -e "\n List of topics: \n $topic_arn \n"
+for i in $topic_arn
+do
+        aws sns delete-topic --topic-arn $i
+        echo "Topic $i is deleted..."
+        sleep 1
+done
+
+#Delete s3 buckets
+aws s3 rb s3://raw-smn --force
+aws s3 rb s3://finished-smn --force
+aws s3 rb s3://my-db-bucket --force
+echo "Buckets are deleted..."
+
 echo "Process is completed..."
