@@ -3,28 +3,42 @@ session_start();
 $user=$_SESSION['username'];
 ?>
 <html>
-<head>
-<title>Image Processing Application</title>
+	<head>
+		<title>Image Processing Application</title>
+		<link rel="stylesheet" type="text/css" href="main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+                var imageFile = ["img1.jpg", "img3.jpg", "img2.jpg", "img4.jpg"];
+                var currentIndex = 0;
+                setInterval(function () {
+                    if (currentIndex == imageFile.length) {
+                        currentIndex = 0;
+                    }
+                    $("body").css('background-image', 'url("' + imageFile[currentIndex++] + '")');
+                }, 5000);
+            });
+</script>
 </head>
-<body>
-<?php 
-echo "Welcome $user";
-?>
-<div style="min-height:300px;padding-left:20%;padding-right:20%;padding-top:5%">
-         </br></br>
-         <a href="gallery.php" style="color:Teal;font-family:'Salsa';font-style:cursive;font-size:120%;font-weight:bold;">View Gallery</a>
-         </br></br>
-         <a href="upload.php" style="color:Teal;font-family:'Salsa';font-style:cursive;font-size:120%;font-weight:bold;">Upload Images</a>
-         </br></br>
-         <?php
-if($user == "controller")
-{
-?>
-<a href="admin.php" style="color:Teal;font-family:'Salsa';font-style:cursive;font-size:120%;font-weight:bold;"
->Administration</a>
-<?php
-}
-?>
-      </div>
-   </body>
+	<body>
+		<div class="left">
+				 <span style="color:white;font-size:20px;"><?php echo "Welcome $user";?></span>
+				</br></br>
+				<a href="gallery.php">View Gallery</a>
+				</br></br>
+				<a href="upload.php">Upload Images</a>
+				</br></br>
+				<?php
+				if($user == "controller")
+				{
+				?>
+				<a href="admin.php">Administration</a>
+				<?php
+				}
+				?>
+				</br></br>
+				<a href="upload.php">Logout</a>
+				</br></br>
+		</div>
+	</body>
 </html>
