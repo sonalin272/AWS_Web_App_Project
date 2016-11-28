@@ -1,0 +1,28 @@
+body, html {
+  height: 100%;
+}
+
+body{
+background-size: cover; 
+}
+.left {
+position: absolute;
+top: 0;
+bottom: 0;
+left:0;
+height: 100%;
+    width: 300px;
+padding-top:50px;
+    border: 2px solid #A9A9A9;
+	background: url("htc-sense-htc-background-textures.jpg") pink;
+}
+
+a{
+	color:pink;
+	font-family:'Salsa';font-style:cursive;
+	font-size:18px;
+	font-weight:bold;
+	padding-left:16px;
+
+}
+
