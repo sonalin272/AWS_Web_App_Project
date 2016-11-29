@@ -43,7 +43,7 @@ $user=$_SESSION['username'];
 				}
 				?>
 				</br></br>
-				<a href="upload.php">Logout</a>
+				<a href="logout.php">Logout</a>
 				</br></br>
 		</div>
 	</body>
