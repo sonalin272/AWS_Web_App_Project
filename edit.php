@@ -120,9 +120,22 @@ $img->writeImage($destpath);
 	'version' => 'latest',
 	'region'  => 'us-west-2']);
 	
-	$sns_result = $sns_client->listTopics([]);
-	$topic_arn = $sns_result['Topics'][0]['TopicArn'];
+	//$sns_result = $sns_client->listTopics([]);
+	//$topic_arn = $sns_result['Topics'][0]['TopicArn'];
 	
+	//Select result from config table
+	$query = "SELECT * FROM CONFIG WHERE ID = 2";
+	if ($result = mysqli_query($link, $query))
+	{
+            $row = $result->fetch_assoc();
+            echo "SNS URL : " . $row['val'];
+            $topic_arn = $row['val'];
+	mysqli_free_result($result);
+ 	}
+	else {
+            printf("Error in execution : %s.\n", mysqli_error($link));
+            exit();
+ 	}
 	//Publish message
 	$sns_res = $sns_client->publish([
     	'Message' => 'Please view your processed image: '. $s_url, // REQUIRED

@@ -12,11 +12,11 @@ $user=$_SESSION['username'];
     $endpoint=$rds_result['DBInstances'][0]['Endpoint']['Address'];
     //Connect to database
     $link = mysqli_connect($endpoint,$db_user,$db_password,$db_name) or die("Error " . mysqli_connect_error());
-    $query = "SELECT * FROM CONFIG";
+    $query = "SELECT * FROM CONFIG where ID = 1";
     if ($result = mysqli_query($link, $query))
     {
          $row = $result->fetch_assoc();
- 	 $mode=$row['mode'];
+ 	 $mode=$row['val'];
          mysqli_free_result($result);
     }
     else {

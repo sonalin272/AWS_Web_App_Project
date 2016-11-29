@@ -62,7 +62,7 @@ require 'vendor/autoload.php';
     }
     if (isset($_POST["save"])){
     	$mode = $_POST["gender"];
-    	if ($result = mysqli_query($link, "UPDATE CONFIG SET mode='$mode'")) {
+    	if ($result = mysqli_query($link, "UPDATE CONFIG SET val='$mode'")) {
         	 printf("Value updated..");
 		mysqli_free_result($result);
 	}
