@@ -4,7 +4,7 @@ sleep 20
 sudo run-one-until-success apt-get update -y
 sudo run-one-until-success apt-get install -y python-setuptools python-pip
 sudo pip install awscli
-sudo run-one-until-success apt-get install -y apache2 php curl php-curl zip unzip php-mysql php-xml libapache2-mod-php mysql-client-5.7 php-gd imagemagick imagick
+sudo run-one-until-success apt-get install -y apache2 php curl php-curl zip unzip php-mysql php-xml libapache2-mod-php mysql-client-5.7 php-gd imagemagick php-imagick
 sudo phpenmod imagick
 sudo systemctl enable apache2
 sudo systemctl start apache2

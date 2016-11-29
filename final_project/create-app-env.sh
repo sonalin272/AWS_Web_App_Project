@@ -1,6 +1,6 @@
 #!/bin/bash
 #Execution of shell script
-#sh create-app-env.sh raw-smn finished-smn snimbalk-db dev root goodluck16 snimbalk_topic snimbalk_queue
+#sh create-app-env.sh raw-smn finished-smn snimbalk-db dev root goodluck16 snimbalk-topic snimbalk-queue
 #***********************************************************
 
 #Variable declaration

@@ -99,7 +99,7 @@ $val='N';
 mysqli_stmt_execute($stmt);
 printf("%d Row inserted.\n", $stmt->affected_rows);
 
-$val=$1;
+$val=$argv[1];
 mysqli_stmt_execute($stmt);
 printf("%d Row inserted.\n", $stmt->affected_rows);
 
