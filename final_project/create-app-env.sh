@@ -13,7 +13,7 @@ username=$5
 password=$6
 topic_name=$7
 queue_name=$8
-db_bucket="s3://my-db-bucket"
+db_bucket="s3://snimbalk-bucket"
 availability_zones="us-west-2b"
 
 #App installation
@@ -28,9 +28,6 @@ aws rds create-db-instance --db-name $db_name --db-instance-identifier $db_ident
 
 aws rds wait db-instance-available --db-instance-identifier $db_identifier
 echo "Database is created..."
-
-#Call php script to create tables
-php create-tables.php
 
 #Create SNS topic
 topicarn=`aws sns create-topic --name $topic_name`
@@ -51,4 +48,8 @@ aws s3 mb $db_bucket --region us-west-2
 
 echo "S3 buckets are created..."
 
+#Call php script to create tables
+php create-tables.php $topicarn
+
+echo "Process completed"
 

@@ -78,7 +78,7 @@ printf("%d Row inserted.\n", $stmt->affected_rows);
 $sql = "CREATE TABLE IF NOT EXISTS CONFIG
 (
 ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-mode CHAR(2) NOT NULL DEFAULT 'N')";
+val VARCHAR(100) NOT NULL)";
 
 $create_table = mysqli_query($link,$sql);
 if ($create_table) {
@@ -90,12 +90,16 @@ else {
 }
 
 // Insert records into config table
-if (!($stmt = $link->prepare("INSERT INTO CONFIG (ID,mode) VALUES (NULL,?)"))) {
+if (!($stmt = $link->prepare("INSERT INTO CONFIG (ID,val) VALUES (NULL,?)"))) {
     echo "Prepare failed: (" . $stmt->errno . ") " . $stmt->error;
 }
 // Prepared statements will not accept literals (pass by reference) in bind_params, you need to declare variables
-$stmt->bind_param("s",$mode);
-$mode='N';
+$stmt->bind_param("s",$val);
+$val='N';
+mysqli_stmt_execute($stmt);
+printf("%d Row inserted.\n", $stmt->affected_rows);
+
+$val=$1;
 mysqli_stmt_execute($stmt);
 printf("%d Row inserted.\n", $stmt->affected_rows);
 
