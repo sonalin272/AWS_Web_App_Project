@@ -9,7 +9,7 @@ form {
     border: 3px solid #f1f1f1;
 }
 body{
-    background: url("htc-sense-htc-background-textures.jpg") pink;
+    background: url("./img/htc-sense-htc-background-textures.jpg") pink;
 }
 input[type=text], input[type=password] {
     width: 100%;
@@ -21,7 +21,6 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-
 button {
     background-color: #1a1a1a;
     color: white;
@@ -39,7 +38,6 @@ button {
     text-align: center;
     margin:0 auto;
 }
-
 img.avatar {
     width: 10%;
     border-radius: 20%;
@@ -67,5 +65,4 @@ img.avatar {
 </form>
 </body>
 </html>
-
 
