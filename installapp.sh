@@ -13,6 +13,10 @@ sudo php composer.phar require aws/aws-sdk-php
 sudo mv /vendor /var/www/html
 #Clone git repository on the instance and copy all files
 git clone git@github.com:illinoistech-itm/snimbalk.git /home/ubuntu/snimbalk
-sudo cp /home/ubuntu/snimbalk/*.php /var/www/html/*.php
+sudo cp /home/ubuntu/snimbalk/final_project/*.php /var/www/html
+sudo cp -r /home/ubuntu/snimbalk/final_project/img /var/www/html
+sudo cp -r /home/ubuntu/snimbalk/final_project/css /var/www/html
+sudo cp -r /home/ubuntu/snimbalk/final_project/js /var/www/html
+
 sudo service apache2 restart
 echo "Hello" > /var/www/html/hello.txt
