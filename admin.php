@@ -2,6 +2,9 @@
 session_start();
 include('profile.php');
 require 'vendor/autoload.php';
+use Aws\Exception\AwsException;
+use Aws\S3\Exception\S3Exception;
+
    //Create client to connect to RDS
     $rds_client = new Aws\Rds\RdsClient([
 	'version' => 'latest',
@@ -25,11 +28,25 @@ require 'vendor/autoload.php';
     //Restore database from s3 bucket
     if (isset($_POST["restoreData"]))
     {
+	try{
 	$result = $s3->getObject([
     	'Bucket' => $my_bucket, // REQUIRED
 	'Key' => 'database_backup.sql',
 	'SaveAs' => $bkppath
-	]);	
+	]);}
+	catch (S3Exception $e) {
+    	// Catch an S3 specific exception.
+    		echo $e->getMessage();
+	exit();
+	}catch (AwsException $e) {
+    	// This catches the more generic AwsException. You can grab information
+    	// from the exception using methods of the exception object.
+    	echo $e->getAwsRequestId() . "\n";
+    	echo $e->getAwsErrorType() . "\n";
+    	echo $e->getAwsErrorCode() . "\n";
+	exit();
+	}
+	
 	$bk_path=$result['@metadata']['effectiveUri'];
 	$command = "mysql --user=$db_user --password=$db_password --host=$endpoint $db_name < $bkppath";
 	exec($command);
@@ -39,7 +56,7 @@ require 'vendor/autoload.php';
 		printf("Error in execution : %s.\n", mysqli_error($link));
     		/* free result set */
     		mysqli_free_result($result);
-	}
+	}	
 	else {
 		printf("Data is restored successfully!!!");	
 	}
