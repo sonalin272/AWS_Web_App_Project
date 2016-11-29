@@ -9,7 +9,7 @@ form {
     border: 3px solid #f1f1f1;
 }
 body{
-    background: url("htc-sense-htc-background-textures.jpg") pink;
+    background: url("./img/htc-sense-htc-background-textures.jpg") pink;
 }
 input[type=text], input[type=password] {
     width: 100%;

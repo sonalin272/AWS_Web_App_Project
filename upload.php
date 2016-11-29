@@ -45,7 +45,7 @@ $user=$_SESSION['username'];
 		echo "Upload functinality is disabled...";} ?>
 		</form>
         </div>
-        <div class="left" style="position: fixed;top: 0;bottom: 0;left:0;height: 100%;width: 300px;padding-top:50px;border: 2px solid #A9A9A9;background: url('htc-sense-htc-background-textures.jpg') pink;">
+        <div class="left" style="position: fixed;top: 0;bottom: 0;left:0;height: 100%;width: 300px;padding-top:50px;border: 2px solid #A9A9A9;background: url('./img/htc-sense-htc-background-textures.jpg') pink;">
  		<span style="color:white;font-size:20px;"><?php echo "Welcome $user";?></span>
              	</br></br>
                 <a href="gallery.php">View Gallery</a>

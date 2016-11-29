@@ -57,7 +57,7 @@ if ($msg_count > 0) {
      
      //Process image
      // load the "stamp" and photo to apply the water mark to
-     $stamp = imagecreatefrompng('IIT-logo.png'); 
+     /*$stamp = imagecreatefrompng('IIT-logo.png'); 
      $im = imagecreatefrompng($raw_url);  
      //Set the margins for the stamp and get the height and width of the stamp image
      $marge_right=10;
@@ -72,8 +72,18 @@ if ($msg_count > 0) {
 
     //output and free memory
     imagepng($im,'/tmp/rendered.png');
-    imagedestroy($im);
+    imagedestroy($im);*/
  
+// Create an Imagick instance for sketch
+
+$img = new Imagick($raw_url);
+$img->sketchImage(10, 0, 45);
+$imagename = "rendered"; //Unique name for output image
+$ext = pathinfo($filename, PATHINFO_EXTENSION); //Get file extension
+$image = $imagename . '.' . $ext;
+$destpath = '/tmp/' . $image;
+$img->writeImage($destpath); 
+
     //Put the modified imae into finished bucket
     //Create client to s3
     $s3 = new Aws\S3\S3Client([
@@ -85,7 +95,7 @@ if ($msg_count > 0) {
     'ACL' => 'public-read',
     'Bucket' => $finished_bucket,
     'Key' => $filename,
-    'SourceFile' => '/tmp/rendered.png']);
+    'SourceFile' => $destpath]);
     $s_url = $s_result['ObjectURL'];
     echo $s_url;
 
