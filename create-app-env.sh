@@ -4,15 +4,15 @@
 #***********************************************************
 
 #Variable declaration
-str="s3://"
-raw_bucket="$str$1"
-finished_bucket="$str$2"
-db_identifier=$3
-db_name=$4
-username=$5
-password=$6
-topic_name=$7
-queue_name=$8
+#str="s3://"
+raw_bucket="s3://raw-smn"
+finished_bucket="s3://finished-smn"
+db_identifier="snimbalk-db"
+db_name="dev"
+username="root"
+password="goodluck16"
+topic_name="snimbalk-topic"
+queue_name="snimbalk-queue"
 db_bucket="s3://snimbalk-bucket"
 availability_zones="us-west-2b"
 
