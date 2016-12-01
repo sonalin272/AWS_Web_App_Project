@@ -34,7 +34,7 @@ topicarn=`aws sns create-topic --name $topic_name`
 echo "$topicarn"
 echo "SNS topic is created..."
 #Subscribe to the topic
-aws sns subscribe --topic-arn $topicarn --protocol email --notification-endpoint sonalin272@gmail.com
+#aws sns subscribe --topic-arn $topicarn --protocol email --notification-endpoint sonalin272@gmail.com
 aws sns subscribe --topic-arn $topicarn --protocol sms --notification-endpoint 15129476633
 
 #Create SQS
