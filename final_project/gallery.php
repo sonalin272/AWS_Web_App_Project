@@ -22,12 +22,12 @@ include('profile.php');
       <link rel="stylesheet" href="css/blueimp-gallery.css">
       <link rel="stylesheet" href="css/blueimp-gallery-indicator.css">
       <link rel="stylesheet" href="css/demo.css">
-      <title>Image Application</title>
+      <title>Image Processing Application</title>
    </head>
-<body>
+<body id="b01">
     <div class="left">      
 <div class="logo">
-<img src="../img/logo.jpg"/>
+<img src="img/logo1.jpg"/>
 <h2>ImageApp</h2> 
 </div>
 </br>         

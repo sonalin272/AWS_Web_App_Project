@@ -124,11 +124,11 @@ $img->writeImage($destpath);
 	//$topic_arn = $sns_result['Topics'][0]['TopicArn'];
 	
 	//Select result from config table
-	$query = "SELECT * FROM CONFIG WHERE ID = 2";
+	$query = "SELECT * FROM CONFIG where ID = 2";
 	if ($result = mysqli_query($link, $query))
 	{
-            $row = $result->fetch_assoc();
-            echo "SNS URL : " . $row['val'];
+            $row = $result->fetch_assoc();    
+	echo "SNS URL : " . $row['val'];
             $topic_arn = $row['val'];
 	mysqli_free_result($result);
  	}
