@@ -1,53 +1,44 @@
-/*
- * blueimp Gallery Demo CSS 2.0.0
- * https://github.com/blueimp/Gallery
- *
- * Copyright 2013, Sebastian Tschan
- * https://blueimp.net
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
- */
+/*demo.css */
 
-body {
+#b01 {
   max-width: 750px;
   margin: 0 auto;
   padding: 1em;
   font-size: 1em;
   line-height: 1.4em;
   background-image: url(../img/backgrnd1.jpg);
-background-size: cover;  
-color: Black;
+  background-size: cover;  
+  color: Black;
  -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
 a {
   color: orange;
-text-decoration: none;
+  text-decoration: none;
 }
 .logo img {
-float: left;
+  float: left;
   width: 30px;
   height: 30px;
   background: #555;
 
 }
 .logo h2 {
-font-family:'Salsa';
-font-style:cursive;
-font-size:30px;
-font-weight:bold;
-color:#FFE4E1;  
-position: relative;
-text-shadow: 2px 2px 4px #A9A9A9;
+  font-family:'Salsa';
+  font-style:cursive;
+  font-size:30px;
+  font-weight:bold;
+  color:#FFE4E1;  
+  position: relative;
+  text-shadow: 2px 2px 4px #A9A9A9;
   top: 18px;
   left: 5px;
 }
 img {
   border: 1px solid #A9A9A9;
   margin: 10px 10px 10px 10px;
-width : 100px;
-height: 100px;
+  width : 100px;
+  height: 100px;
 /*  vertical-align: middle;*/
 }
 h1 {
@@ -61,21 +52,45 @@ h2,
   left: 100px;
 }
 h3{
-position:relative;
-font-family:'Salsa';
-font-style:cursive;
+  position:relative;
+  font-family:'Salsa';
+  font-style:cursive;
 }
 .left {
-font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
-position: fixed;
-top: 0;
-bottom: 0;
-left:0;
-height: 100%;
-width: 300px;
-padding-left: 10px;
-border: 2px solid #A9A9A9;
-background: url('../img/htc-sense-htc-background-textures.jpg') pink;"
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left:0;
+  height: 100%;
+  width: 300px;
+  padding-left: 10px;
+  border: 2px solid #A9A9A9;
+  background: url('../img/htc-sense-htc-background-textures.jpg') pink;
+}
+#d01 {
+  position: fixed;
+  top:100px;
+margin-left: 150px;
+}
+input[type=file] {
+        width: 100%;
+        font-size: 14px;
+        margin: 0;
+}
+input[type=submit] {
+        background-color: #708090;
+        color: white;
+        border-radius: 8px;
+        font-size: 13px;
+	font-weight:solid;
+        padding: 4px 4px;
+	margin: 8px 0;
+        border: 2px solid #555555;
+        box-sizing: border-box;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        cursor: pointer;
+        width: 70px;
 }
 
 @media (min-width: 481px) {
