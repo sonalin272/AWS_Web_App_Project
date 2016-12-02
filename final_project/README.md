@@ -17,9 +17,11 @@
 4. sh create-env.sh ami-438b2a23 snimbalk sg-fd8c4384 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group 4
 
 5. Wait for 1 min to get environment ready and then open web app url(index.php) in the browser to access application
+
 	Admin username and password -
 	Username: controller;
 	Password : admin;
+	
 	Your username and password -
 	username: hajek@iit.edu;
 	password: ilovebunny;
@@ -30,6 +32,7 @@
 #create-app-env.sh 
 It installs php, mysql on ubuntu virtual machine before calling cretae-tables.php script.
 It creates required aws services like SNS, SQS, RDS and s3 buckets. Below are the names of services which gets created by script -
+
 S3 buckets : raw-smn, finished-smn, snimbalk-bucket
 SQS : snimbalk-queue
 SNS :  snimbalk-topic 

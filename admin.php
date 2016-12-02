@@ -44,29 +44,6 @@ $user=$_SESSION['username'];
 			 Copyright 2016, ImageApp, Inc.
 		   </div>
 		</div>
-                <div id="d01">
-                        <form name="admin"  method="post" action="">
-                                        </br></br>
-                                        <span style="font-family:'Salsa';font-style:cursive;color:black;font-size:15px;"
->Restore DB: </span></br>
-                                        <input type="submit"  id= "restoreData" name="restoreData" value="Submit" />
-                                        </br></br>
-                                        <span style="font-family:'Salsa';font-style:cursive;color:black;font-size:15px;"
->Store DB backup:</span></br>
-                                        <input type="submit"  id= "storeBkp" name="storeBkp" value="Save" />
-                                        </br></br>
-                                        <span style="font-family:'Salsa';font-style:cursive;color:black;font-size:15px;"
->Enable read-only mode:</span>
-                                        </br>
-                                        <input type="radio" name="opt" value="N" checked> <span style="font-family:Salsa
-;color:black;font-size:12px;">No</span><br>
-                                        <input type="radio" name="opt" value="Y"> <span style="font-family:Salsa;color:b
-lack;font-size:12px;">Yes</span>
-                                        </br>
-                                        <input type="submit"  id= "save" name="save" value="Save" />
-                                        </br></br>
-                        </form>
-                </div>
 		<div style="min-height:300px;padding-left:20%;padding-right:20%;padding-top:5%">
 		<?php
 		//Create client to connect to RDS
@@ -163,5 +140,28 @@ lack;font-size:12px;">Yes</span>
 		mysqli_close($link);
 		?>
 		</div>
+                <div id="d01">
+                        <form name="admin"  method="post" action="">
+                                        </br></br>
+                                        <span style="font-family:'Salsa';font-style:cursive;color:black;font-size:15px;"
+>Restore DB: </span></br>
+                                        <input type="submit"  id= "restoreData" name="restoreData" value="Submit" />
+                                        </br></br>
+                                        <span style="font-family:'Salsa';font-style:cursive;color:black;font-size:15px;"
+>Store DB backup:</span></br>
+                                        <input type="submit"  id= "storeBkp" name="storeBkp" value="Save" />
+                                        </br></br>
+                                        <span style="font-family:'Salsa';font-style:cursive;color:black;font-size:15px;"
+>Enable read-only mode:</span>
+                                        </br>
+                                        <input type="radio" name="opt" value="N" checked> <span style="font-family:Salsa
+;color:black;font-size:12px;">No</span><br>
+                                        <input type="radio" name="opt" value="Y"> <span style="font-family:Salsa;color:b
+lack;font-size:12px;">Yes</span>
+                                        </br>
+                                        <input type="submit"  id= "save" name="save" value="Save" />
+                                        </br></br>
+                        </form>
+                </div>
 	</body>
 </html>
