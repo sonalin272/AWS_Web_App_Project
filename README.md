@@ -16,11 +16,11 @@
 
 5. Wait for 1 min to get environment ready and then open web app url(index.php) in the browser to access application
 	Admin username and password -
-	Username: controller
-	Password : admin
-	You username and password -
-	username: hajek@iit.edu
-	password: ilovebunny
+	Username: controller;
+	Password : admin;
+	Your username and password -
+	username: hajek@iit.edu;
+	password: ilovebunny;
 	(Username and password details are also listed in create-tables.php)
 6. sh destroy-env.sh
 ---------------------------------------------------------------------------------------------------------------------------------
@@ -40,10 +40,10 @@ This script gets called from create-app-env.sh script. It creates below required
 RECORDS, CONFIG, USERS
 
 Note: Record table inserts 2 records in advance for controller user. While inserting records, it uses hardcoded urls as below - 
-https://s3-us-west-2.amazonaws.com/raw-smn/eartrumpet.png
-https://s3-us-west-2.amazonaws.com/finished-smn/eartrumpet-bw.png
-https://s3-us-west-2.amazonaws.com/raw-smn/Knuth.jpg
-https://s3-us-west-2.amazonaws.com/finished-smn/Knuth-bw.jpg
+https://s3-us-west-2.amazonaws.com/raw-smn/eartrumpet.png,
+https://s3-us-west-2.amazonaws.com/finished-smn/eartrumpet-bw.png,
+https://s3-us-west-2.amazonaws.com/raw-smn/Knuth.jpg,
+https://s3-us-west-2.amazonaws.com/finished-smn/Knuth-bw.jpg,
 
 Kindly put eartrumpet.png, Knuth.jpg images into 'raw-smn' and eartrumpet-bw.png, Knuth-bw.jpg images into 'finished-smn' buckets.
 If you change bucket names in create-app-env.sh and profile.php scripts then update above urls as well in create-tables.php else images will be blank.
