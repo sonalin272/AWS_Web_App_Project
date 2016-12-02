@@ -5,9 +5,11 @@
 1. Ensure that IAM profile, security key, 'developer' role, security group exists and accordingly replace values while passing arguments to create-env.sh
 
 2. Place below 6 files from /snimbalk/final_project folder of git repository into your /home/ubuntu/ directory.
+	
 	create-app-env.sh, create-tables.php, create-env.sh, installapp.sh, installappcronjob.sh, destroy-env.sh
 
 3. Please replace below positional parameter by your mobile number if you want to receive notifiction on your mobile .'hajeck@iit.edu' is already added in the script so kindly click on confirm option once you receive an email from aws after execution of below script.
+	
 	sh create-app-env.sh 15129476633 
 
 	Kindly put eartrumpet.png, Knuth.jpg images into 'raw-smn' and eartrumpet-bw.png, Knuth-bw.jpg images into 'finished-smn' buckets. This will display images in the 'controller' user's gallery to start with an application.If you change bucket names in create-app-env.sh and profile.php scripts then update urls in the insert statements of create-tables.php as well else images will be blank in gallery.
