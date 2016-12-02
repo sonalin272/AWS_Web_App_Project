@@ -13,7 +13,15 @@ include('profile.php');
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         </head>
         <body id="b01">
-                <div id="d02">
+                <div style="position=relative;margin-left:150px;padding-top:250px;">
+                        <form enctype="multipart/form-data" id="uploader" action="upload.php" method="POST">
+                        <!-- MAX_FILE_SIZE must precede the file input field -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+                        <!-- Name of input element determines name in $_FILES array -->
+                        <input type="submit" id="uploadFile" name="uploadFile" value="Back"/>
+                        </form>
+                </div>
+                <div id="d01">
 		<?php
 		if (isset($_FILES['file'])and isset($_POST['buttonFile']))
 		{
@@ -61,7 +69,7 @@ include('profile.php');
     			// Prepared statement
     			if (!($stmt = $link->prepare("INSERT INTO RECORDS (ID,email,phone,filename,s3_raw_url,s3_finished_url,status,receipt) VALUES (NULL,?,?,?,?,?,?,?)"))) {
 				printf("Prepare failed: %s.\n", mysqli_stmt_error($result));
-				//exit();    
+				exit();    
     			}
 			$email=$user;
 			$phone='15129476633';
@@ -101,16 +109,8 @@ include('profile.php');
                 echo '<span style="font-family:Salsa;font-style:cursive;color:black;font-size:15px;">Mobile No.: ' . $phone . '</span></br>';
                 echo '<span style="font-family:Salsa;font-style:cursive;color:black;font-size:15px;">Filename: ' . $filename . '</span></br>';
                 echo '<span style="font-family:Salsa;font-style:cursive;color:black;font-size:15px;">Raw s3 bucket URL: ' . $url . '</span></br>';
-		                echo '<span style="font-family:Salsa;font-style:cursive;color:black;font-size:15px;">We will notify once your file is processed...Thank you!!!</span></br></br>';
+		                echo '<span style="font-family:Salsa;font-style:cursive;color:black;font-size:15px;">We will notify you once the file is processed...Thank you!!!</span></br></br>';
 		?>
-		</div>
-		<div>
-   			<form enctype="multipart/form-data" id="uploader" action="upload.php" method="POST">
-      			<!-- MAX_FILE_SIZE must precede the file input field -->
-      			<input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-      			<!-- Name of input element determines name in $_FILES array -->
-      			<input type="submit" id="uploadFile" name="uploadFile" value="Back"/>
-   			</form>
 		</div>
 	</body>
 </html>
