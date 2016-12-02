@@ -38,6 +38,35 @@ else {
 	exit();
 }
 
+/* Prepare an insert statement */
+$query = "INSERT INTO RECORDS (ID,email,phone,filename,s3_raw_url,s3_finished_url,status,receipt) VALUES (NULL,?,?,?,?,?,?,?)";
+if(!($stmt = mysqli_prepare($link, $query))) {
+  echo "Prepare failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+
+mysqli_stmt_bind_param($stmt, "sssssis", $val1,$val2,$val3,$val4,$val5,$val6,$val7);
+$val1 = 'controller';
+$val2 = '1-354-456-533';
+$val3 = 'eartrumpet.png';
+$val4 = 'https://s3-us-west-2.amazonaws.com/raw-smn/eartrumpet.png';
+$val5 = 'https://s3-us-west-2.amazonaws.com/finished-smn/eartrumpet-bw.png';
+$val6 = 1;
+$val7 = 'ngjf446ff';
+// Execute the statement
+mysqli_stmt_execute($stmt);
+printf("%d Row inserted.\n", $stmt->affected_rows);
+
+$val1 = 'controller';
+$val2 = '1-354-456-533';
+$val3 = 'Knuth.jpg';
+$val4 = 'https://s3-us-west-2.amazonaws.com/raw-smn/Knuth.jpg';
+$val5 = 'https://s3-us-west-2.amazonaws.com/finished-smn/Knuth-bw.jpg';
+$val6 = 1;
+$val7 = 'ngjf4ff45f';
+// Execute the statement
+mysqli_stmt_execute($stmt);
+printf("%d Row inserted.\n", $stmt->affected_rows);
+
 //Create table 'users'
 $sql = "CREATE TABLE IF NOT EXISTS USERS
 (

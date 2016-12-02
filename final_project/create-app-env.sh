@@ -1,6 +1,6 @@
 #!/bin/bash
 #Execution of shell script
-#sh create-app-env.sh raw-smn finished-smn snimbalk-db dev root goodluck16 snimbalk-topic snimbalk-queue
+#sh create-app-env.sh 15129476633
 #***********************************************************
 
 #Variable declaration
@@ -15,6 +15,7 @@ topic_name="snimbalk-topic"
 queue_name="snimbalk-queue"
 db_bucket="s3://snimbalk-bucket"
 availability_zones="us-west-2b"
+phone_no=$1
 
 #App installation
 sudo apt-get update -y
@@ -34,8 +35,8 @@ topicarn=`aws sns create-topic --name $topic_name`
 echo "$topicarn"
 echo "SNS topic is created..."
 #Subscribe to the topic
-#aws sns subscribe --topic-arn $topicarn --protocol email --notification-endpoint sonalin272@gmail.com
-aws sns subscribe --topic-arn $topicarn --protocol sms --notification-endpoint 15129476633
+aws sns subscribe --topic-arn $topicarn --protocol email --notification-endpoint hajek@iit.edu
+aws sns subscribe --topic-arn $topicarn --protocol sms --notification-endpoint $phone_no
 
 #Create SQS
 aws sqs create-queue --queue-name $queue_name	
