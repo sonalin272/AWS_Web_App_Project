@@ -5,26 +5,23 @@
 1. Ensure that IAM profile, security key, 'developer' role, security group exists and accordingly replace values while passing arguments to create-env.sh
 
 2. Place below 6 files from /snimbalk/final_project folder of git repository into your /home/ubuntu/ directory.
-	
 	create-app-env.sh, create-tables.php, create-env.sh, installapp.sh, installappcronjob.sh, destroy-env.sh
 
 3. Please replace below positional parameter by your mobile number if you want to receive notifiction on your mobile .'hajeck@iit.edu' is already added in the script so kindly click on confirm option once you receive an email from aws after execution of below script.
-	
+
 	sh create-app-env.sh 15129476633 
 
-	Kindly put eartrumpet.png, Knuth.jpg images into 'raw-smn' and eartrumpet-bw.png, Knuth-bw.jpg images into 'finished-smn' buckets. This will display images in the 'controller' user's gallery to start with an application.If you change bucket names in create-app-env.sh and profile.php scripts then update urls in the insert statements of create-tables.php as well else images will be blank in gallery.
+	After execution of above script, kindly put eartrumpet.png, Knuth.jpg images into 'raw-smn' and eartrumpet-bw.png, Knuth-bw.jpg images into 'finished-smn' buckets. This will display images in the 'controller' user's gallery to start with an application.If you change bucket names in create-app-env.sh and profile.php scripts then update urls in the insert statements of create-tables.php as well else images will be blank in gallery.
 
 4. sh create-env.sh ami-438b2a23 snimbalk sg-fd8c4384 snimbalk-load-balancer snimbalk-launch-config snimbalk-auto-scaling-group 4
 
 5. Wait for 1 min to get environment ready and then open web app url(index.php) in the browser to access application
-
 	Admin username and password -
-	Username: controller;
-	Password : admin;
-	
-	Your username and password -
-	username: hajek@iit.edu;
-	password: ilovebunny;
+	Username: controller
+	Password : admin
+	You username and password -
+	username: hajek@iit.edu
+	password: ilovebunny
 	(Username and password details are also listed in create-tables.php)
 6. sh destroy-env.sh
 ---------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +29,6 @@
 #create-app-env.sh 
 It installs php, mysql on ubuntu virtual machine before calling cretae-tables.php script.
 It creates required aws services like SNS, SQS, RDS and s3 buckets. Below are the names of services which gets created by script -
-
 S3 buckets : raw-smn, finished-smn, snimbalk-bucket
 SQS : snimbalk-queue
 SNS :  snimbalk-topic 
@@ -45,10 +41,10 @@ This script gets called from create-app-env.sh script. It creates below required
 RECORDS, CONFIG, USERS
 
 Note: Record table inserts 2 records in advance for controller user. While inserting records, it uses hardcoded urls as below - 
-https://s3-us-west-2.amazonaws.com/raw-smn/eartrumpet.png,
-https://s3-us-west-2.amazonaws.com/finished-smn/eartrumpet-bw.png,
-https://s3-us-west-2.amazonaws.com/raw-smn/Knuth.jpg,
-https://s3-us-west-2.amazonaws.com/finished-smn/Knuth-bw.jpg,
+https://s3-us-west-2.amazonaws.com/raw-smn/eartrumpet.png
+https://s3-us-west-2.amazonaws.com/finished-smn/eartrumpet-bw.png
+https://s3-us-west-2.amazonaws.com/raw-smn/Knuth.jpg
+https://s3-us-west-2.amazonaws.com/finished-smn/Knuth-bw.jpg
 
 Kindly put eartrumpet.png, Knuth.jpg images into 'raw-smn' and eartrumpet-bw.png, Knuth-bw.jpg images into 'finished-smn' buckets.
 If you change bucket names in create-app-env.sh and profile.php scripts then update above urls as well in create-tables.php else images will be blank.
